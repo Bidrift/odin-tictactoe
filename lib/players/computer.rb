@@ -20,6 +20,6 @@ class Computer < Player
   end
 
   def random_move(board)
-    p board.valid_moves.sample
+    board.valid_moves.sample
   end
 end

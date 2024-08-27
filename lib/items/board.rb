@@ -2,14 +2,12 @@ require_relative "../players/player"
 require_relative "item"
 require_relative "circle"
 require_relative "cross"
-require_relative "../game/game"
 
 # This is the board of the game
 class Board
-  def initialize(game)
-    @board_size = 3
-    @board = Array.new(3) { Array.new(3) }
-    @game = game
+  def initialize(board_size = 3, board = Array.new(3) { Array.new(3) })
+    @board_size = board_size
+    @board = board
   end
 
   def show_board
@@ -19,7 +17,7 @@ class Board
   end
 
   def save_move(choice, player)
-    move = Item.item_type(player.player_id).new(player)
+    move = Item.item_type(player)
     put_item(choice, move)
   end
 
@@ -44,7 +42,7 @@ class Board
   end
 
   def winning_move?(choice, player)
-    move = Item.item_type(player.player_id).new(player)
+    move = Item.item_type(player)
     put_item(choice, move)
     over = over?
     put_item(choice, nil)
@@ -52,7 +50,7 @@ class Board
   end
 
   def losing_move?(choice, player)
-    move = Item.item_type((player.player_id + 1) % 2).new(player)
+    move = Item.opposing_item_type(player)
     put_item(choice, move)
     over = over?
     put_item(choice, nil)

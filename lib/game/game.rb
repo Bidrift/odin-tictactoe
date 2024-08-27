@@ -51,7 +51,7 @@ class Game
 
   def create_board
     puts "Creating board...".colorize(:green)
-    @board = Board.new(self)
+    @board = Board.new
   end
 
   def create_players

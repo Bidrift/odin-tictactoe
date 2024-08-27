@@ -15,7 +15,7 @@ end
 
 # A player in the game
 class Player
-  attr_accessor :player_id
+  attr_reader :player_id
 
   include Playable
   def initialize(player_id)
